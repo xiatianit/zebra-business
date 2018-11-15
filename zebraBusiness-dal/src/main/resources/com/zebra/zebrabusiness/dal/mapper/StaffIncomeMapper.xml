@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zebra.zebrabusiness.dal.mapper.StaffIncomeMapper">
+	<resultMap id="BaseResultMap"
+		type="com.zebra.zebrabusiness.dal.dataobject.StaffIncomeDO">
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="sid" property="sid" jdbcType="BIGINT" />
+		<result column="current_month_income" property="currentMonthIncome"
+			jdbcType="DOUBLE" />
+		<result column="total_income" property="totalIncome" jdbcType="DOUBLE" />
+		<result column="bank_info" property="bankInfo" jdbcType="VARCHAR" />
+		<result column="year" property="year" jdbcType="VARCHAR" />
+		<result column="month" property="month" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,sid,current_month_income,total_income,bank_info,year,month
+	</sql>
+
+	<insert id="insert"
+		parameterType="com.zebra.zebrabusiness.dal.dataobject.StaffIncomeDO">
+		INSERT INTO c_staff_income
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sid != null">
+				sid,
+			</if>
+			<if test="currentMonthIncome != null">
+				current_month_income,
+			</if>
+			<if test="totalIncome != null">
+				total_income,
+			</if>
+			<if test="bankInfo != null">
+				bank_info,
+			</if>
+			<if test="year != null">
+				year,
+			</if>
+			<if test="month != null">
+				month,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sid != null">
+				#{sid,jdbcType=BIGINT}
+			</if>
+			<if test="currentMonthIncome != null">
+				#{currentMonthIncome,jdbcType=DOUBLE}
+			</if>
+			<if test="totalIncome != null">
+				#{totalIncome,jdbcType=DOUBLE}
+			</if>
+			<if test="bankInfo != null">
+				#{bankInfo,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null">
+				#{year,jdbcType=VARCHAR}
+			</if>
+			<if test="month != null">
+				#{month,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</insert>
+
+	<select id="selectCurrentIncome" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM c_staff_income a WHERE
+		<if test="sid != null  ">
+			a.sid = #{sid,jdbcType=BIGINT}
+		</if>
+		<if test="month != null  ">
+			and month = #{month,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="selectHistoryIncome" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM c_staff_income a WHERE
+		<if test="sid != null  ">
+			a.sid = #{sid,jdbcType=BIGINT}
+		</if>
+		ORDER BY YEAR,MONTH DESC
+	</select>
+</mapper>

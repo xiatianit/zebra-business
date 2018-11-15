@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zebra.zebrabusiness.dal.mapper.StaffBaseMapper">
+	<resultMap id="BaseResultMap"
+		type="com.zebra.zebrabusiness.dal.dataobject.StaffBaseDO">
+		<result column="sid" property="sid" jdbcType="BIGINT" />
+		<result column="staff_name" property="staffName" jdbcType="VARCHAR" />
+		<result column="id_card_no" property="idCardNo" jdbcType="VARCHAR" />
+		<result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="staff_status" property="staffStatus" jdbcType="INTEGER" />
+		<result column="head_portrait" property="headPortrait"
+			jdbcType="VARCHAR" />
+		<result column="register_time" property="registerTime"
+			jdbcType="BIGINT" />
+		<result column="franchiser_code" property="franchiserCode" jdbcType="VARCHAR" />
+		<result column="franchiser_name" property="franchiserName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		sid,staff_name,id_card_no,nick_name,phone,password,staff_status,head_portrait,register_time,franchiser_code,franchiser_name
+	</sql>
+	<select id="selectByPk" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM c_staff_base a WHERE a.sid = #{sid,jdbcType=BIGINT}
+	</select>
+	<select id="selectByPhone" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM c_staff_base a WHERE a.phone = #{phone,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insert" parameterType="com.zebra.zebrabusiness.dal.dataobject.StaffBaseDO">
+		INSERT INTO c_staff_base
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sid != null">
+				sid,
+			</if>
+			<if test="staffName != null">
+				staff_name,
+			</if>
+			<if test="idCardNo != null">
+				id_card_no,
+			</if>
+			<if test="nickName != null">
+				nick_name,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="staffStatus != null">
+				staff_status,
+			</if>
+			<if test="headPortrait != null">
+				head_portrait,
+			</if>
+			<if test="registerTime != null">
+				register_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sid != null">
+				#{sid,jdbcType=BIGINT},
+			</if>
+			<if test="staffName != null">
+				#{staffName,jdbcType=VARCHAR},
+			</if>
+			<if test="idCardNo != null">
+				#{idCardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="nickName != null">
+				#{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="staffStatus != null">
+				#{staffStatus,jdbcType=INTEGER},
+			</if>
+			<if test="headPortrait != null">
+				#{headPortrait,jdbcType=VARCHAR},
+			</if>
+			<if test="registerTime != null">
+				#{registerTime,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.zebra.zebrabusiness.dal.dataobject.StaffBaseDO">
+		UPDATE c_staff_base
+		<set>
+			<if test="sid != null">
+				sid = #{sid,jdbcType=BIGINT},
+			</if>
+			<if test="staffName != null">
+				staff_name = #{staffName,jdbcType=VARCHAR},
+			</if>
+			<if test="idCardNo != null">
+				id_card_no = #{idCardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="nickName != null">
+				nick_name = #{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="staffStatus != null">
+				staff_status = #{staffStatus,jdbcType=INTEGER},
+			</if>
+			<if test="headPortrait != null">
+				head_portrait = #{headPortrait,jdbcType=VARCHAR},
+			</if>
+			<if test="registerTime != null">
+				register_time = #{registerTime,jdbcType=INTEGER},
+			</if>
+		</set>
+		where sid = #{sid,jdbcType=BIGINT}
+	</update>
+
+
+	<select id="selectByCondition" parameterType="com.zebra.zebrabusiness.dal.dataobject.StaffBaseDO"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		FROM c_staff_base a WHERE 1=1
+		<if test="staffStatus != null  ">
+			and staff_status = #{staffStatus,jdbcType=INTEGER}
+		</if>
+
+		<if test="sid != null  ">
+			and sid = #{sid,jdbcType=BIGINT}
+		</if>
+
+		<if test="offset != null and rows != null">
+			limit #{offset},#{rows}
+		</if>
+	</select>
+
+	<select id="selectCountByCondition" parameterType="com.zebra.zebrabusiness.dal.dataobject.StaffBaseDO"
+		resultType="java.lang.Integer">
+		select count(1)
+		FROM c_staff_base a WHERE 1=1
+		<if test="staffStatus != null  ">
+			and staff_status = #{staffStatus,jdbcType=INTEGER}
+		</if>
+
+		<if test="sid != null  ">
+			and sid = #{sid,jdbcType=BIGINT}
+		</if>
+
+	</select>
+
+
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config description="自动配置">
+
+	<group name="SpringBoot配置">
+		<property name="server.port" defaultValue="8090" description="main方法启动端口" />
+		<property name="server.contextPath" defaultValue="/zebrabusinessapi"
+			description="main方法启动ContentPath" />
+		<property name="spring.application.name" defaultValue="zebrabusiness-api"
+			description="springBoot标识" />
+	</group>
+
+	<group name="Redis配置">
+		<property name="spring.redis.database" defaultValue="0"
+			description="redis数据库，默认0" />
+		<property name="spring.redis.host" defaultValue="47.96.36.210"
+			description="redis地址" />
+		<property name="spring.redis.port" defaultValue="6379"
+			description="redis端口" />
+		<property name="spring.redis.password" defaultValue="ebike&amp;2017&amp;"
+			description="redis密码" />
+		<property name="spring.redis.timeout" defaultValue="0"
+			description="链接超时" />
+		<property name="spring.redis.pool.max-active" defaultValue="100"
+			description="redis最大活动数" />
+		<property name="spring.redis.pool.max-wait" defaultValue="-1"
+			description="redis等待" />
+		<property name="spring.redis.pool.max-idle" defaultValue="20"
+			description="spring.redis.pool.max-idle 密码" />
+		<property name="spring.redis.pool.min-idle" defaultValue="0"
+			description="spring.redis.pool.min-idle" />
+	</group>
+
+	<group name="MQ事件推送配置">
+		<property name="spring.rabbitmq.host" defaultValue="47.96.36.210"
+				  description="mq 地址" />
+		<property name="spring.rabbitmq.port" defaultValue="5672"
+				  description="mq 端口" />
+		<property name="spring.rabbitmq.username" defaultValue="ebike"
+				  description="mq 用户名" />
+		<property name="spring.rabbitmq.password" defaultValue="ebike#2017"
+				  description="mq 密码" />
+		<property name="spring.rabbitmq.virtualHost" defaultValue="/ebike"
+				  description="rabbitmq virtualHost" />
+	</group>
+
+	<group name="DB配置">
+		<property name="datasource.master.host" defaultValue="db2.banmabike.com"
+				  description="DB地址" />
+		<property name="datasource.master.port" defaultValue="3306"
+				  description="DB端口" />
+		<property name="datasource.master.db" defaultValue="ebike"
+				  description="DB 实例" />
+		<property name="datasource.master.username" defaultValue="ebike"
+				  description="DB 用户名" />
+		<property name="datasource.master.password" defaultValue="Ebike#@!2017"
+				  description="DB 密码" />
+		<property name="datasource.master.mappersPath" defaultValue="com.zebra.zebrabusiness.dal.mapper"
+				  description="mapper path" />
+		<property name="datasource.master.maxIdle" defaultValue="10"
+				  description="DB 链接数" />
+		<property name="datasource.master.minIdle" defaultValue="5"
+				  description="DB 最小链接数" />
+		<property name="datasource.master.maxActive" defaultValue="20"
+				  description="DB 最大链接数" />
+
+		<property name="datasource.slave.host" defaultValue="db2.banmabike.com"
+				  description="DB地址" />
+		<property name="datasource.slave.port" defaultValue="3306"
+				  description="DB端口" />
+		<property name="datasource.slave.db" defaultValue="ebike"
+				  description="DB 实例" />
+		<property name="datasource.slave.username" defaultValue="ebike"
+				  description="DB 用户名" />
+		<property name="datasource.slave.password" defaultValue="Ebike#@!2017"
+				  description="DB 密码" />
+		<property name="datasource.slave.mappersPath" defaultValue="com.zebra.zebrabusiness.dal.mapper"
+				  description="mapper path" />
+		<property name="datasource.slave.maxIdle" defaultValue="10"
+				  description="DB 链接数" />
+		<property name="datasource.slave.minIdle" defaultValue="5"
+				  description="DB 最小链接数" />
+		<property name="datasource.slave.maxActive" defaultValue="20"
+				  description="DB 最大链接数" />
+	</group>
+
+	<group name="系统业务变量全局配置">
+		<property name="business.param.bikeBatteryElecQuanlityLow"
+			defaultValue="5" description="电车电池电量低于5时，则给予提示" />
+	</group>
+
+	<script>
+		<generate template="application.properties.vm" destfile="WEB-INF/classes/application.properties"
+			charset="UTF-8" encoding="UTF-8" />
+	</script>
+
+</config>

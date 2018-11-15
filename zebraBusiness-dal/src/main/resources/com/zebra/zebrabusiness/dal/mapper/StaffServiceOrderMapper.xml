@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zebra.zebrabusiness.dal.mapper.StaffServiceOrderMapper">
+	<resultMap id="BaseResultMap"
+		type="com.zebra.zebrabusiness.dal.dataobject.StaffServiceOrderDO">
+		<result column="service_order_id" property="serviceOrderId"
+			jdbcType="BIGINT" />
+		<result column="order_action" property="orderAction" jdbcType="INTEGER" />
+		<result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+		<result column="service_start_time" property="serviceStartTime"
+			jdbcType="INTEGER" />
+		<result column="service_end_time" property="serviceEndTime"
+			jdbcType="INTEGER" />
+		<result column="settle_time" property="settleTime" jdbcType="INTEGER" />
+		<result column="last_modify_time" property="lastModifyTime"
+			jdbcType="INTEGER" />
+		<result column="order_context" property="orderContext"
+			jdbcType="VARCHAR" />
+		<result column="bike_code" property="bikeCode" jdbcType="VARCHAR" />
+		<result column="bike_no" property="bikeNo" jdbcType="VARCHAR" />
+		<result column="sid" property="sid" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		service_order_id,order_action,order_status,service_start_time,service_end_time,
+		settle_time,last_modify_time,order_context,bike_code,bike_no,sid
+	</sql>
+
+	<insert id="insert"
+		parameterType="com.zebra.zebrabusiness.dal.dataobject.StaffServiceOrderDO">
+		INSERT INTO c_staff_service_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="serviceOrderId != null">
+				service_order_id,
+			</if>
+			<if test="orderAction != null">
+				order_action,
+			</if>
+			<if test="orderStatus != null">
+				order_status,
+			</if>
+			<if test="serviceStartTime != null">
+				service_start_time,
+			</if>
+			<if test="serviceEndTime != null">
+				service_end_time,
+			</if>
+			<if test="settleTime != null">
+				settle_time,
+			</if>
+			<if test="lastModifyTime != null">
+				last_modify_time,
+			</if>
+			<if test="orderContext != null">
+				order_context,
+			</if>
+			<if test="bikeCode != null">
+				bike_code,
+			</if>
+			<if test="bikeNo!= null">
+				bike_no,
+			</if>
+			<if test="sid != null">
+				sid,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="serviceOrderId != null">
+				#{serviceOrderId,jdbcType=BIGINT},
+			</if>
+			<if test="orderAction != null">
+				#{orderAction,jdbcType=INTEGER},
+			</if>
+			<if test="orderStatus != null">
+				#{orderStatus,jdbcType=INTEGER},
+			</if>
+			<if test="serviceStartTime != null">
+				#{serviceStartTime,jdbcType=INTEGER},
+			</if>
+			<if test="serviceEndTime != null">
+				#{serviceEndTime,jdbcType=INTEGER},
+			</if>
+			<if test="settleTime != null">
+				#{settleTime,jdbcType=INTEGER},
+			</if>
+			<if test="lastModifyTime != null">
+				#{lastModifyTime,jdbcType=INTEGER},
+			</if>
+			<if test="orderContext != null">
+				#{orderContext,jdbcType=VARCHAR},
+			</if>
+			<if test="bikeCode != null">
+				#{bikeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="bikeNo != null">
+				#{bikeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="sid != null">
+				#{sid,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="selectServiceBySid" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM c_staff_service_order a WHERE 1=1
+		<if test="sid != null  ">
+			and sid = #{sid,jdbcType=BIGINT}
+		</if>
+		<if test="type != null  ">
+			and order_action = #{type,jdbcType=INTEGER}
+		</if>
+	</select>
+</mapper>

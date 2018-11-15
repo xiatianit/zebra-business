@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zebra.zebrabusiness.dal.mapper.BatteryMapper">
+	<resultMap id="BaseResultMap"
+		type="com.zebra.zebrabusiness.dal.dataobject.BatteryDO">
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="battery_code" property="batteryCode" jdbcType="VARCHAR" />
+		<result column="battery_model" property="batteryModel"
+			jdbcType="VARCHAR" />
+		<result column="battery_capacity" property="batteryCapacity"
+			jdbcType="DOUBLE" />
+		<result column="battery_elec" property="batteryElec" jdbcType="INTEGER" />
+		<result column="terminal_server_address" property="terminalServerAddress"
+			jdbcType="VARCHAR" />
+		<result column="rest_mileage" property="restMileage" jdbcType="DOUBLE" />
+		<result column="bike_code" property="bikeCode" jdbcType="VARCHAR" />
+		<result column="last_location" property="lastLocation"
+			jdbcType="VARCHAR" />
+		<result column="gprs_no" property="gprsNo" jdbcType="VARCHAR" />
+		<result column="gprs_rest_charge" property="gprsRestCharge"
+			jdbcType="DOUBLE" />
+		<result column="battery_status" property="batteryStatus"
+			jdbcType="INTEGER" />
+		<result column="latitude" property="latitude" jdbcType="DECIMAL" />
+		<result column="longitude" property="longitude" jdbcType="DECIMAL" />
+		<result column="opera_time" property="operaTime" jdbcType="BIGINT" />
+		<result column="warranty_start" property="warrantyStart"
+			jdbcType="BIGINT" />
+		<result column="warranty_end" property="warrantyEnd" jdbcType="BIGINT" />
+		<result column="warranty_remark" property="warrantyRemark"
+			jdbcType="VARCHAR" />
+		<result column="sid" property="sid" jdbcType="BIGINT" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		battery_code,battery_model,battery_capacity,battery_elec,terminal_server_address,rest_mileage,bike_code,last_location,gprs_no,gprs_rest_charge,battery_status,opera_time,warranty_start,warranty_end,warranty_remark,sid,remark
+	</sql>
+	<select id="selectByPk" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM c_battery a WHERE a.battery_code =
+		#{batteryCode,jdbcType=VARCHAR}
+	</select>
+	<select id="selectBySid" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM c_battery a WHERE a.sid = #{sid,jdbcType=BIGINT}
+	</select>
+
+</mapper>
